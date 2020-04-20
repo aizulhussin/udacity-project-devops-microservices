@@ -1,0 +1,31 @@
+#Create Pod
+(.devops) aizulhos:~/environment/udacity-DevOpsMicroservices (master) $ ./run_kubernetes.sh
+Run docker..
+b50d2040af89e11214288196429c22430d76c24427c45b9f2626b9fb3e1ad1c1
+pod/predict-app created
+NAME                              READY   STATUS              RESTARTS   AGE
+hello-minikube-64b64df8c9-xl4rz   1/1     Running             1          16m
+predict-app                       0/1     ContainerCreating   0          0s
+error: unable to forward port because pod is not running. Current status=Pending
+
+#Pod Running
+(.devops) aizulhos:~/environment/udacity-DevOpsMicroservices (master) $ ./run_kubernetes.sh
+Run docker..
+docker: Error response from daemon: Conflict. The container name "/predict-app" is already in use by container "b50d2040af89e11214288196429c22430d76c24427c45b9f2626b9fb3e1ad1c1". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+Error from server (AlreadyExists): pods "predict-app" already exists
+kubectl get pods...
+NAME                              READY   STATUS    RESTARTS   AGE
+hello-minikube-64b64df8c9-xl4rz   1/1     Running   1          18m
+predict-app                       1/1     Running   0          2m10s
+Unable to listen on port 8080: Listeners failed to create with the following errors: [unable to create listener: Error listen tcp4 127.0.0.1:8080: bind: address already in use unable to create listener: Error listen tcp6 [::1]:8080: bind: address already in use]
+error: unable to listen on any of the requested ports: [{8080 8080}]
+
+#Make Prediction output
+(.devops) aizulhos:~/environment/udacity-DevOpsMicroservices (master) $ ./make_prediction.sh
+Port: 8080
+{
+  "prediction": [
+    20.35373177134412
+  ]
+}
